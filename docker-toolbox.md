@@ -61,9 +61,9 @@ Docker pull is very slow and periodical breaking in China, there are some compan
 
 Helpful docs to configure docker hub mirrors.
 
-* [ docker ??????](http://www.datastart.cn/tech/2016/09/28/docker-mirror.html)
-* [Docker ??????](https://lug.ustc.edu.cn/wiki/mirrors/help/docker)
-* [DockerHub????](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
+* [国内 docker 镜像比较](http://www.datastart.cn/tech/2016/09/28/docker-mirror.html)
+* [Docker 使用帮助](https://lug.ustc.edu.cn/wiki/mirrors/help/docker)
+* [DockerHub 镜像加速](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
 
 [163]:https://c.163.com/
 [daocloud]:https://daocloud.io
