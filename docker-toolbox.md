@@ -8,7 +8,7 @@ Docker Toolbox supports Windows and Mac OS system, which ship with a Boot2Docker
 
 Docker Toolbox includes a series of tools, one is `docker-machine` which is use for creating new virtual machine.
 
-Start up the Toolbox Quickstart shell prompt. By default, it will start up the default virtual machine.
+Start up the Toolbox Quickstart shell prompt. By default, it will try to start up the default machine if it exists or create one for you.
 
 ```
 docker-machine create -d virtualbox --engine-registry-mirror https://docker.mirrors.ustc.edu.cn meandev 
@@ -22,11 +22,21 @@ Now connect your shell to the new created machine.
 eval "($docker-machine env meandev)"
 ```
 
-Verify the virtual machine environment.
+Verify the created machine.
+
+```
+$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+default   -        virtualbox   Stopped                                       Unknown
+meandev   *        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
+```
+
+Check the machine environment.
 
 ```
 docker-machine env meandev
 ```
+
 You will see the following info.
 
 ```
@@ -56,6 +66,6 @@ Helpful docs to configure docker hub mirrors.
 * [DockerHub????](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
 
 [163]:https://c.163.com/
-[daoclou]:https://daocloud.io
+[daocloud]:https://daocloud.io
 [alicloud]:https://aliyuncs.com
 [ustc]:https://ustc.edu.cn
