@@ -4,7 +4,7 @@ Docker for Windows provides native support for Windows built-in Hyper-V virtual 
 
 Docker Toolbox supports Windows and Mac OS system, which ship with a Boot2Docker image, and run docker in VirtualBox. In your system, the `docker` command is connecting to the hosted docker daemon in the virtual machine.
 
-## Create a new machine
+## Docker machine
 
 Docker Toolbox includes a series of tools, one is `docker-machine` which is use for creating new virtual machine.
 
@@ -22,7 +22,7 @@ Now connect your shell to the new created machine.
 eval "($docker-machine env meandev)"
 ```
 
-Verify the created machine.
+Verify if you have selected the created machine.
 
 ```
 $ docker-machine ls
@@ -50,9 +50,24 @@ export COMPOSE_CONVERT_WINDOWS_PATHS="true"
 # eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env meandev)
 ```
 
-## Configure docker registry mirror
+## Troubleshoots
 
-Docker pull is very slow and periodical breaking in China, there are some companies or organisations provide docker hub mirror serivce.
+### Port forwarding to localhost
+
+Under Windows, when use Docker Toolbox and Virtualbox, you can not access the server in docker via *localhost*. You have to expose the virtualbox ports to host machine. 
+
+Make sure the machine is stop. 
+
+```
+VBoxManage modifyvm "meandev" --natpf1 "tcp-port3306,tcp,,3306,,3306"
+VBoxManage modifyvm "meandev" --natpf1 "udp-port3306,udp,,3306,,3306"
+```
+
+*meandev* is the machine name.
+
+### Configure docker registry mirror
+
+Docker pull is very slow and periodical breaking in China, luckily there are some companies or organisations provide docker hub mirror serivce.
 
 * [NetEase][163]
 * [DaoCloud][daocloud]
