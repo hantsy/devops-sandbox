@@ -6,7 +6,7 @@ Docker Toolbox supports Windows and Mac OS system, which ship with a Boot2Docker
 
 ## Docker machine
 
-Docker Toolbox includes a series of tools, one is `docker-machine` which is use for creating new virtual machine.
+Docker Toolbox includes a series of tools, one is `docker-machine` which is use for managing virtual machines.
 
 Start up the Toolbox shipped **Quickstart shell** prompt. By default, it will try to start up the default machine if it exists or create one for you.
 
@@ -52,7 +52,20 @@ default   -        virtualbox   Stopped                                       Un
 meandev   *        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
 ```
 
-For all options, `docker-machine help` to get detailed help.
+You can use the following commands to start and stop a machine.
+
+```
+docker-machine start meandev
+docker-machine stop meandev
+```
+
+You can use the `rm` command to remove a machine.
+
+```
+docker-machine rm meandev
+```
+
+For all available commands, use `docker-machine help` to get detailed help.
 
 ## Troubleshoots
 
