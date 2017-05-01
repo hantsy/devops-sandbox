@@ -8,13 +8,17 @@ Docker Toolbox supports Windows and Mac OS system, which ship with a Boot2Docker
 
 Docker Toolbox includes a series of tools, one is `docker-machine` which is use for creating new virtual machine.
 
-Start up the Toolbox Quickstart shell prompt. By default, it will try to start up the default machine if it exists or create one for you.
+Start up the Toolbox shipped **Quickstart shell** prompt. By default, it will try to start up the default machine if it exists or create one for you.
+
+Execute the following command to create a new virtual machine.
 
 ```
 docker-machine create -d virtualbox --engine-registry-mirror https://docker.mirrors.ustc.edu.cn meandev 
 ```
 
-Check the machine environment.
+When it is done, a new virtual machine will be ready in VirtualBox.
+
+Check the new machine environment.
 
 ```
 docker-machine env meandev
@@ -39,7 +43,7 @@ Now connect your shell to the new created machine.
 eval "($docker-machine env meandev)"
 ```
 
-Verify if you have selected the created machine.
+Verify if you have selected the **meandev** machine.
 
 ```
 $ docker-machine ls
@@ -64,6 +68,8 @@ VBoxManage modifyvm "meandev" --natpf1 "udp-port3306,udp,,3306,,3306"
 ```
 
 *meandev* is the machine name.
+
+Alternatively, edit it in **Network/NAT/Advanced/Ports Forwarding** panel in the Virtualbox directly. 
 
 ### Configure docker registry mirror
 
