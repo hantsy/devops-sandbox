@@ -14,23 +14,6 @@ Start up the Toolbox Quickstart shell prompt. By default, it will try to start u
 docker-machine create -d virtualbox --engine-registry-mirror https://docker.mirrors.ustc.edu.cn meandev 
 ```
 
-For all options, `docker-machine help` to get detailed help.
-
-Now connect your shell to the new created machine.
-
-```
-eval "($docker-machine env meandev)"
-```
-
-Verify if you have selected the created machine.
-
-```
-$ docker-machine ls
-NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-default   -        virtualbox   Stopped                                       Unknown
-meandev   *        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
-```
-
 Check the machine environment.
 
 ```
@@ -49,6 +32,23 @@ export COMPOSE_CONVERT_WINDOWS_PATHS="true"
 # Run this command to configure your shell:
 # eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env meandev)
 ```
+
+Now connect your shell to the new created machine.
+
+```
+eval "($docker-machine env meandev)"
+```
+
+Verify if you have selected the created machine.
+
+```
+$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+default   -        virtualbox   Stopped                                       Unknown
+meandev   *        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
+```
+
+For all options, `docker-machine help` to get detailed help.
 
 ## Troubleshoots
 
