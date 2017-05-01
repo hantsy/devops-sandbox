@@ -69,7 +69,13 @@ VBoxManage modifyvm "meandev" --natpf1 "udp-port3306,udp,,3306,,3306"
 
 *meandev* is the machine name.
 
-Alternatively, open Virtualbox, select *meandev* machine, click *Settings* in the context menu, and edit ports forwarding in the **Network/Adapter（NAT）/Advanced/Ports Forwarding** panel. 
+Alternatively, you can edit it in Virtualbox directly.
+
+1. Open Virtualbox
+2. Select *meandev* machine.
+3. Right click it and select *Settings* item in the context menu.
+4. Select *Network/Adapter（NAT）/Advanced* in the panel. 
+5. Click *Ports Forwarding* to edit it in the new popup window.
 
 ### Configure docker registry mirror
 
