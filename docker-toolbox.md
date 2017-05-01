@@ -74,7 +74,7 @@ Alternatively, you can edit it in Virtualbox directly.
 1. Open Virtualbox
 2. Select *meandev* machine.
 3. Right click it and select *Settings* item in the context menu.
-4. Select *Network/Adapter（NAT）/Advanced* in the panel. 
+4. Select *Network/Adapter（NAT）/Advanced* in the *Settings* panel. 
 5. Click *Ports Forwarding* to edit it in the new popup window.
 
 ### Configure docker registry mirror
