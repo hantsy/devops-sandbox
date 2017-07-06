@@ -4,34 +4,21 @@ Docker for Windows provides native support for Windows built-in Hyper-V virtual 
 
 Docker Toolbox supports Windows and Mac OS system, which ship with a Boot2Docker image, and run docker in VirtualBox. In your system, the `docker` command is connecting to the hosted docker daemon in the virtual machine.
 
-## Create a new machine
+## Docker machine
 
-Docker Toolbox includes a series of tools, one is `docker-machine` which is use for creating new virtual machine.
+Docker Toolbox includes a series of tools, one is `docker-machine` which is use for managing virtual machines.
 
-Start up the Toolbox Quickstart shell prompt. By default, it will try to start up the default machine if it exists or create one for you.
+Start up the Toolbox shipped **Quickstart shell** prompt. By default, it will try to start up the default machine if it exists or create one for you.
+
+Execute the following command to create a new virtual machine.
 
 ```
 docker-machine create -d virtualbox --engine-registry-mirror https://docker.mirrors.ustc.edu.cn meandev 
 ```
 
-For all options, `docker-machine help` to get detailed help.
+When it is done, a new virtual machine will be ready in VirtualBox.
 
-Now connect your shell to the new created machine.
-
-```
-eval "$(docker-machine env meandev)"
-```
-
-Verify the created machine.
-
-```
-$ docker-machine ls
-NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-default   -        virtualbox   Stopped                                       Unknown
-meandev   *        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
-```
-
-Check the machine environment.
+Check the new machine environment.
 
 ```
 docker-machine env meandev
@@ -50,9 +37,62 @@ export COMPOSE_CONVERT_WINDOWS_PATHS="true"
 # eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env meandev)
 ```
 
-## Configure docker registry mirror
+Now connect your shell to the new created machine.
 
-Docker pull is very slow and periodical breaking in China, there are some companies or organisations provide docker hub mirror serivce.
+```
+eval "$(docker-machine env meandev)"
+```
+
+Verify if you have selected the **meandev** machine.
+
+```
+$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+default   -        virtualbox   Stopped                                       Unknown
+meandev   *        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
+```
+
+You can use the following commands to start and stop a machine.
+
+```
+docker-machine start meandev
+docker-machine stop meandev
+```
+
+You can use the `rm` command to remove a machine.
+
+```
+docker-machine rm meandev
+```
+
+For all available commands, use `docker-machine help` to get detailed help.
+
+## Troubleshoots
+
+### Port forwarding to localhost
+
+Under Windows, when use Docker Toolbox and Virtualbox, you can not access the server in docker via *localhost*. You have to expose the virtualbox ports to host machine. 
+
+Make sure the machine is stop. 
+
+```
+VBoxManage modifyvm "meandev" --natpf1 "tcp-port3306,tcp,,3306,,3306"
+VBoxManage modifyvm "meandev" --natpf1 "udp-port3306,udp,,3306,,3306"
+```
+
+*meandev* is the machine name.
+
+Alternatively, you can edit it in Virtualbox directly.
+
+1. Open Virtualbox
+2. Select *meandev* machine.
+3. Right click it and select *Settings* item in the context menu.
+4. Select *Network/Adapter（NAT）/Advanced* in the *Settings* panel. 
+5. Click *Ports Forwarding* to edit it in the new popup window.
+
+### Configure docker registry mirror
+
+Docker pull is very slow and periodical breaking in China, luckily there are some companies or organisations provide docker hub mirror serivce.
 
 * [NetEase][163]
 * [DaoCloud][daocloud]
@@ -61,9 +101,9 @@ Docker pull is very slow and periodical breaking in China, there are some compan
 
 Helpful docs to configure docker hub mirrors.
 
-* [ docker ??????](http://www.datastart.cn/tech/2016/09/28/docker-mirror.html)
-* [Docker ??????](https://lug.ustc.edu.cn/wiki/mirrors/help/docker)
-* [DockerHub????](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
+* [国内 docker 镜像比较](http://www.datastart.cn/tech/2016/09/28/docker-mirror.html)
+* [Docker 使用帮助](https://lug.ustc.edu.cn/wiki/mirrors/help/docker)
+* [DockerHub 镜像加速](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
 
 [163]:https://c.163.com/
 [daocloud]:https://daocloud.io
