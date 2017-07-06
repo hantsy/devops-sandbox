@@ -19,7 +19,7 @@ For all options, `docker-machine help` to get detailed help.
 Now connect your shell to the new created machine.
 
 ```
-eval "($docker-machine env meandev)"
+eval "$(docker-machine env meandev)"
 ```
 
 Verify the created machine.
