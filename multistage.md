@@ -7,34 +7,34 @@ I tried to add a multi-stage Dockefile to build my sample project  [angularjs-sp
 ```
 FROM node:latest AS ui
 WORKDIR /usr/src/ui
-COPY app .
 COPY package.json .
-COPY gulpfile.js .
-COPY bower.json .
-COPY .bowerrc .
-RUN npm install
-RUN npm run build
-
+# Setup NPM mirror, optionally for China users.
+# RUN npm config set registry https://registry.npm.taobao.org/ 
+RUN npm install 
+COPY . .
+RUN node_modules/.bin/bower install --allow-root
+RUN node_modules/.bin/gulp
 
 FROM maven:latest AS boot
 WORKDIR /usr/src/app
 COPY pom.xml .
+# COPY settings.xml /usr/share/maven/ref/settings-docker.xml
 RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
 COPY . .
-RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
- 
+RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml clean package -DskipTests
  
 FROM java:8-jdk-alpine
 WORKDIR /static
 COPY --from=ui /usr/src/ui/dist/ .
 WORKDIR /app
-COPY --from=boot /usr/src/app/target/angularjs-springmvc-sample-boot-1.0-SNAPSHOT.jar .
-ENTRYPOINT ["java", "-jar", "/app/angularjs-springmvc-sample-boot-1.0-SNAPSHOT.jar"]
+COPY --from=boot /usr/src/app/target/angularjs-springmvc-sample-boot.jar .
+ENTRYPOINT ["java", "-jar", "/app/angularjs-springmvc-sample-boot.jar"]
+
 ```
 
-There are multi **FROM** in the same Dockerfile, the **AS** is use for naming a stage.
+There are multi **FROM** in this Dockerfile, the **AS** is use for naming a stage.
 
-In the followed stages, **COPY** command can accept a **--from** parameter to refer a former stage.
+In the final stage, **COPY** command accepts a **--from** parameter to refer a former stage.
 
 In our Dockerfile:
 
@@ -42,4 +42,20 @@ In our Dockerfile:
 * **boot** build the Spring Boot based backend codes into a jar.
 * The final stage will run this project.
 
+Follow the [Docker Toolbox notes](https://github.com/hantsy/devops-sandbox/blob/master/docker-toolbox.md) and create a new docker machine for test purpose.
 
+Build docker image.
+
+```
+docker build -t angularjs-springmvc-multistage .
+```
+
+Run `angularjs-springmvc-multistage` in docker container.
+
+```
+docker run -it --rm -p 9000:9000  angularjs-springmvc-multistage
+```
+
+Open your browser, and navigate http://<docker-machine ip>:9000. 
+
+![multistage docker](https://github.com/hantsy/devops-sandbox/blob/master/multistage.png)
