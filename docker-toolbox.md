@@ -94,6 +94,7 @@ Alternatively, you can edit it in Virtualbox directly.
 
 Docker pull is very slow and periodical breaking in China, luckily there are some companies or organisations provide docker hub mirror serivce.
 
+* [Docker CN][docker-cn]
 * [NetEase][163]
 * [DaoCloud][daocloud]
 * [AliYun][alicloud]
@@ -105,6 +106,7 @@ Helpful docs to configure docker hub mirrors.
 * [Docker 使用帮助](https://lug.ustc.edu.cn/wiki/mirrors/help/docker)
 * [DockerHub 镜像加速](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
 
+[docker-cn]:https://registry.docker-cn.com
 [163]:https://c.163.com/
 [daocloud]:https://daocloud.io
 [alicloud]:https://aliyuncs.com
