@@ -8,15 +8,14 @@ Run MS SQL server in docker.
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 -d microsoft/mssql-server-linux:latest
 ```
 
-By default `MSSQL_PID=Developer`.
-
 Run an express edition instead.
 
 ```
 docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<YourStrong!Passw0rd>' -e 'MSSQL_PID=Express' -p 1433:1433 -d microsoft/mssql-server-linux:latest
 ```
+By default `MSSQL_PID=Developer`.
 
-Check the running Docker.
+Check status of the running MS SQL Server in Docker.
 
 ```
 docker ps -a
@@ -37,7 +36,7 @@ Connect to MS SQL Server.
 ```
 docker exec -it <container name> "bash"
 
-# enter docker console.
+# enter sqlcmd console in docker.
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '<YourNewStrong!Passw0rd>'
 
 ```
@@ -74,5 +73,10 @@ Quit sql console.
 >QUIT
 ```
 
+
+## Reference 
+
+1. [Restore a SQL Server database in a Linux Docker container](https://docs.microsoft.com/en-us/sql/linux/tutorial-restore-backup-in-sql-server-container?view=sql-server-linux-2017)
+2. [Quickstart: Run the SQL Server 2017 container image with Docker](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-linux-2017)
 
 
