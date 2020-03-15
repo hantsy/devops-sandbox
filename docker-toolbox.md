@@ -1,6 +1,6 @@
 # Docker Toolbox
 
-Docker for Windows provides native support for Windows built-in Hyper-V virtual machine. But for some ledacy systems, or in some cases, you can not give up VirtualBox, you could have to use Docker Toolbox.
+Docker Desktop for Windows provides native support for Windows built-in Hyper-V virtual machine. But for some legacy systems, or in some cases, you can not give up VirtualBox, you could have to use Docker Toolbox.
 
 Docker Toolbox supports Windows and Mac OS system, which ship with a Boot2Docker image, and run docker in VirtualBox. In your system, the `docker` command is connecting to the hosted docker daemon in the virtual machine.
 
@@ -13,7 +13,18 @@ Start up the Toolbox shipped **Quickstart shell** prompt. By default, it will tr
 Execute the following command to create a new virtual machine.
 
 ```
-docker-machine create -d virtualbox --engine-registry-mirror https://docker.mirrors.ustc.edu.cn meandev 
+docker-machine create -d virtualbox --engine-registry-mirror https://registry.docker-cn.com 
+--virtualbox-share-folder "/e:e"
+--engine-insecure-registry 192.168.99.100:5000
+--virtualbox-memory 2048
+meandev 
+
+```
+
+Add a docker registry to the existing docker machine.
+
+```
+docker-machine ssh default "echo 'EXTRA_ARGS=\"--registry-mirror=https://registry.docker-cn.com \"' | sudo tee -a /var/lib/boot2docker/profile"
 ```
 
 When it is done, a new virtual machine will be ready in VirtualBox.
@@ -71,7 +82,7 @@ For all available commands, use `docker-machine help` to get detailed help.
 
 ### Port forwarding to localhost
 
-Under Windows, when use Docker Toolbox and Virtualbox, you can not access the server in docker via *localhost*. You have to expose the virtualbox ports to host machine. 
+Under Windows, when use Docker Toolbox and VirtualBox, you can not access the server in docker via *localhost*. You have to expose the VirtualBox ports to host machine. 
 
 Make sure the machine is stop. 
 
@@ -82,9 +93,9 @@ VBoxManage modifyvm "meandev" --natpf1 "udp-port3306,udp,,3306,,3306"
 
 *meandev* is the machine name.
 
-Alternatively, you can edit it in Virtualbox directly.
+Alternatively, you can edit it in VirtualBox directly.
 
-1. Open Virtualbox
+1. Open VirtualBox
 2. Select *meandev* machine.
 3. Right click it and select *Settings* item in the context menu.
 4. Select *Network/Adapter（NAT）/Advanced* in the *Settings* panel. 
@@ -92,7 +103,7 @@ Alternatively, you can edit it in Virtualbox directly.
 
 ### Configure docker registry mirror
 
-Docker pull is very slow and periodical breaking in China, luckily there are some companies or organisations provide docker hub mirror serivce.
+Docker pull is very slow and periodical breaking in China, luckily there are some companies or organizations provide docker hub mirror service.
 
 * [Docker CN][docker-cn]
 * [NetEase][163]
@@ -105,7 +116,7 @@ Helpful docs to configure docker hub mirrors.
 * [国内 docker 镜像比较](http://www.datastart.cn/tech/2016/09/28/docker-mirror.html)
 * [Docker 使用帮助](https://lug.ustc.edu.cn/wiki/mirrors/help/docker)
 * [DockerHub 镜像加速](https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F)
-
+---
 [docker-cn]:https://registry.docker-cn.com
 [163]:https://c.163.com/
 [daocloud]:https://daocloud.io
