@@ -35,4 +35,7 @@ DevOps sandbox
 ### Git
 * [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
 * [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)  The original source of **Git Flow** .
-
+* [My favorite git log explained](https://www.deadcoderising.com/my-favorite-git-log-explained/)
+* [Gist: Ideas for improvements to `git log --graph`](https://gist.github.com/datagrok/4221767)
+* [Microsoft Azure DevOps Resource Center](https://docs.microsoft.com/en-us/azure/devops/learn/)
+* [Think like a Git](http://think-like-a-git.net/)
