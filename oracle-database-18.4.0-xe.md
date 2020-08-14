@@ -39,7 +39,7 @@ Then replace the `yum install` with the following.
     yum -y localinstall ./$INSTALL_FILE_1 && \
 ```
 
-Do not forget to put the downloaded rpm into the same folder of *Dockerfile.xe* file.
+Check the complete modified Dockerfile from this [gist](https://gist.github.com/hantsy/57ed22ea775763ceceaebaa01182592b). And do not forget to put the downloaded rpm into the same folder of *Dockerfile.xe* file.
 
 Execute the above docker build command again, it should be succeeded .
 
