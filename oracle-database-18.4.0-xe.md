@@ -63,8 +63,8 @@ services:
   oracledb:
     image: oracle/database:18.4.0-xe
     environment:
-      - "ORACLE_PWD:Passw0rd"
-#      - "ORACLE_CHARACTERSET:AL32UTF8" # default is AL32UTF8
+      - ORACLE_PWD=Passw0rd
+#      - ORACLE_CHARACTERSET=AL32UTF8 # default is AL32UTF8
     volumes:
       - ./oradata:/opt/oracle/oradata # persistent oracle database data.
     ports:
