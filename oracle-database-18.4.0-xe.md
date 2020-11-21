@@ -1,14 +1,14 @@
 # Building a custom Oracle Database XE Docker Image
 
-In these days, I want to connect an Oracle Database to play my sample codes, but I found preparing a Oracle Database instance in my local development environment is not easy.
+In these days, I was trying to connect an Oracle Database instance in my sample codes, but I found preparing it is really not easy.
 
-Installing and configuring a complete full-featured Oracle Database Standard Edition(SE) or Enterprise Edition(EE) will waste too much disk spaces and your time. In before experience, I would like to run a Oracle Database Express Edition(XE) in my local machine to test my application.
+Installing and configuring a complete full-featured Oracle Database Standard Edition(SE) or Enterprise Edition(EE) will waste your disk space and time. In before experience, I would like to run a dependent database server in Docker and focus on the application development.
 
-Oracle has published Docker Images of the  SE and EE  through Docker hub and self-host [Container registry](https://container-registry.oracle.com/), but there is no a public XE version there.
+Oracle has published official Docker Images of the  SE and EE  through Docker hub and its self-host [Container registry](https://container-registry.oracle.com/), but there is no a public XE version there. Fortunately Oracle maintains a [oracle/docker-images](https://github.com/oracle/docker-images/) repo on Github which contains Dockerfiles for almost all Oracle products, including a XE version of Oracle Database.
 
-Oracle maintains a [oracle/docker-images](https://github.com/oracle/docker-images/) repo on Github which contains Dockerfiles for almost all Oracle products, including the XE  version of Oracle Database.
+Navigate to [OracleDatabase/SingleInstance/dockerfiles/18.4.0](https://github.com/oracle/docker-images/tree/master/OracleDatabase/SingleInstance/dockerfiles/18.4.0), fetch all files into your local disc, Let's build it for yourself.
 
-Navigate to [OracleDatabase/SingleInstance/dockerfiles/18.4.0](https://github.com/oracle/docker-images/tree/master/OracleDatabase/SingleInstance/dockerfiles/18.4.0), fetch all files into your local disc, Make sure you have installed the newest Docker in your system.  For Windows/MacOS users, install the latest Docker for Windows/MacOS.
+Make sure you have installed Docker in your system.  For Windows/MacOS users, install the latest Docker for Windows/MacOS.
 
 Enter the folder which contains the Dockerfile resource you have downloaded, then run the following command to build the Docker image.
 
@@ -16,9 +16,9 @@ Enter the folder which contains the Dockerfile resource you have downloaded, the
 docker build -t oracle/database:18.4.0-xe -f Dockerfile.xe .
 ```
 
-Ideally it will take some minutes to complete.
+Generally it will take some minutes to complete.
 
-Unluckily it fails again and again here  when fetching the oracle-database rpm file.  To overcome this barrier, I decide to download the rpm file manually using an external download tool, then perform a small modification on the original *Dockerfile.xe* to make it install the local rpm instead of the remote one.
+Unluckily it failed again and again here when fetching the oracle-database rpm file in my machine. To overcome this barrier, I decided to download the rpm file manually using an external download tool, then perform a small modification on the original *Dockerfile.xe* to make it install the local rpm instead of the remote URL.
 
 Firstly , at line 41, replace the rpm URL with a local rpm file.
 
@@ -53,8 +53,7 @@ docker run --name <container name> \
 -v [<host mount point>:]/opt/oracle/oradata \
 oracle/database:18.4.0-xe
 ```
-
-Alternatively, run it from a Docker Compose file. There is a sample of Docker compose file to run Oracle Database XE .
+Alternatively, run it from a Docker Compose file. There is a Docker compose sample file to run Oracle Database XE .
 
 ```yaml
 version: "3.5" # specify docker-compose version, v3.5 is compatible with docker 17.12.0+
@@ -64,8 +63,8 @@ services:
   oracledb:
     image: oracle/database:18.4.0-xe
     environment:
-      - "ORACLE_PWD:Passw0rd"
-#      - "ORACLE_CHARACTERSET:AL32UTF8" # default is AL32UTF8
+      - ORACLE_PWD=Passw0rd
+#      - ORACLE_CHARACTERSET=AL32UTF8 # default is AL32UTF8
     volumes:
       - ./oradata:/opt/oracle/oradata # persistent oracle database data.
     ports:
@@ -145,7 +144,7 @@ If it is the first time to run this command, it will take some time to prepare a
 
 When you see the **DATABASE IS READY TO USE!** is displayed, the database is ready for use.
 
-Check the stauts Docker container.
+Check the stauts of the running Docker container.
 
 ```bash
  docker ps
@@ -153,7 +152,7 @@ Check the stauts Docker container.
  7044c6afe68b        oracle/database:18.4.0-xe   "/bin/sh -c 'exec $O…"   12 minutes ago      Up 12 minutes (healthy)   0.0.0.0:1521->1521/tcp, 0.0.0.0:5500->5500/tcp, 0.0.0.0:8080->8080/tcp   oracle-jdbc-ds-war_oracledb_1
 ```
 
-At anytime you can change password on an running Oracle instance.
+Anytime you can change password on an running Oracle instance.
 
 ```bash
 > docker exec 7044c6afe68b ./setPassword.sh "Passw0rd"

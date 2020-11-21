@@ -110,6 +110,25 @@ Docker pull is very slow and periodical breaking in China, luckily there are som
 * [DaoCloud][daocloud]
 * [AliYun][alicloud]
 * [USTC][ustc]
+* [Tencent](https://mirror.ccs.tencentyun.com)
+
+Docker for Windows configuration.
+
+```shell
+{
+  "registry-mirrors": [
+    "https://mirror.ccs.tencentyun.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com/"
+  ],
+  "insecure-registries": [],
+  "debug": true,
+  "experimental": true,
+  "features": {
+    "buildkit": true
+  }
+}
+```
 
 Helpful docs to configure docker hub mirrors.
 
