@@ -22,6 +22,7 @@ jobs:
         run: |
           cd ./docker/glassfish6
           docker build -t hantsy/glassfish6:latest -f Dockerfile .
+          docker -d hantsy/glassfish6:latest -p 4848:4848
 
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
