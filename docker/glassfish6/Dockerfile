@@ -22,7 +22,7 @@ RUN curl -o "${GLASSFISH_ARCHIVE}.zip" -L "${GLASSFISH_ZIP_URL}" \
 ENV GLASSFISH_HOME="${INSTALL_DIR}/${GLASSFISH_ARCHIVE}/glassfish"
 ENV DEPLOYMENT_DIR="${GLASSFISH_HOME}/domains/domain1/autodeploy"
 
-COPY ./entrypoint.sh "${INSTALL_DIR}"
+COPY --chown=serveradmin:serveradmin ./entrypoint.sh "${INSTALL_DIR}"
 
 USER serveradmin
 WORKDIR ${INSTALL_DIR}
