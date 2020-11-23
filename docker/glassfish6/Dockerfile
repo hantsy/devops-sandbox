@@ -25,6 +25,7 @@ ENV DEPLOYMENT_DIR="${GLASSFISH_HOME}/domains/domain1/autodeploy"
 USER serveradmin
 WORKDIR ${INSTALL_DIR}
 
+COPY ./entrypoint.sh .
 ENTRYPOINT ["sh", "-c", "./entrypoint.sh"]
 
 EXPOSE 4848 8009 8080 8181
