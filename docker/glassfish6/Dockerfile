@@ -6,7 +6,7 @@ ENV ADMIN_USER="admin"
 ENV ADMIN_PASSWORD=""
 
 ENV GLASSFISH_ARCHIVE="glassfish6"
-ENV GLASSFISH_VERSION="6.0.0-RC2"
+ENV GLASSFISH_VERSION="6.0.0"
 ENV DOMAIN_NAME="domain1"
 ENV INSTALL_DIR="/opt/appsvr"
 ENV GLASSFISH_ZIP_URL="https://github.com/eclipse-ee4j/glassfish/releases/download/${GLASSFISH_VERSION}/glassfish-${GLASSFISH_VERSION}.zip"
