@@ -6,20 +6,22 @@ ENV ADMIN_USER="admin"
 ENV ADMIN_PASSWORD=""
 
 ENV GLASSFISH_ARCHIVE="glassfish6"
-ENV GLASSFISH_VERSION="6.0.0-RC2"
+ENV GLASSFISH_VERSION="6.0.0"
 ENV DOMAIN_NAME="domain1"
 ENV INSTALL_DIR="/opt/appsvr"
 ENV GLASSFISH_ZIP_URL="https://github.com/eclipse-ee4j/glassfish/releases/download/${GLASSFISH_VERSION}/glassfish-${GLASSFISH_VERSION}.zip"
 
 RUN useradd -b /opt -m -s /bin/sh -d ${INSTALL_DIR} serveradmin && echo serveradmin:serveradmin | chpasswd
+
+COPY ./entrypoint.sh "${INSTALL_DIR}" 
+
 RUN curl -o "${GLASSFISH_ARCHIVE}.zip" -L "${GLASSFISH_ZIP_URL}" \
-    && unzip "${GLASSFISH_ARCHIVE}.zip" -d "${INSTALL_DIR}" \
-	&& cp ./entrypoint.sh "${INSTALL_DIR}" \
+    && unzip "${GLASSFISH_ARCHIVE}.zip" -d "${INSTALL_DIR}" \	
     && chown -R serveradmin:serveradmin "${INSTALL_DIR}" \
     && chmod -R a+rw "${INSTALL_DIR}" \
     && rm "${GLASSFISH_ARCHIVE}.zip" \
     && true
-	
+
 ENV GLASSFISH_HOME="${INSTALL_DIR}/${GLASSFISH_ARCHIVE}/glassfish"
 ENV DEPLOYMENT_DIR="${GLASSFISH_HOME}/domains/domain1/autodeploy"
 
