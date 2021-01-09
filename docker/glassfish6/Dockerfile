@@ -14,7 +14,7 @@ ENV GLASSFISH_ZIP_URL="https://github.com/eclipse-ee4j/glassfish/releases/downlo
 RUN useradd -b /opt -m -s /bin/sh -d ${INSTALL_DIR} serveradmin && echo serveradmin:serveradmin | chpasswd
 RUN curl -o "${GLASSFISH_ARCHIVE}.zip" -L "${GLASSFISH_ZIP_URL}" \
     && unzip "${GLASSFISH_ARCHIVE}.zip" -d "${INSTALL_DIR}" \
-	&& cp ./entrypoint.sh "${INSTALL_DIR}"
+	&& cp ./entrypoint.sh "${INSTALL_DIR}" \
     && chown -R serveradmin:serveradmin "${INSTALL_DIR}" \
     && chmod -R a+rw "${INSTALL_DIR}" \
     && rm "${GLASSFISH_ARCHIVE}.zip" \
