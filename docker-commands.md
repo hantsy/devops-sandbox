@@ -39,13 +39,13 @@ Volume mapping.
 docker run -v /data:/var/lib/mysql mysql
 ```
 
-Inspect container.
+Inspect a container.
 
 ```bash
 docker inpsect <docker id or name>
 ```
 
-Container logs.
+Show container logs.
 
 ```bash
 docker logs <doker id or name>
@@ -81,7 +81,7 @@ Attach to a container.
 docker attach <docker id or name, eg.a043d> 
 ```
 
-List containers.
+List all containers.
 
 ```bash
 docker ps
@@ -128,21 +128,29 @@ docker pull nginx
 //`docker run` will pull the image firstly.
 ```
 
-List All Docker images.
+List all docker images.
 
 ```bash
 docker images
 docker image ls
 ```
+Remove a docker image.
+
+```bash
+docker rmi <image id or name>
+//or use 
+docker image remove ...
+```
+
 Similarly, remove all docker images.
 
 ```bash
 docker rmi $(docker images -q)
 ```
 
-Create an image.
+Build a custome image from Dockerfile.
 
-```bas
+```dockerfile
 FROM ubuntu 
 RUN apt-get update
 RUN apt-get install python
@@ -152,25 +160,27 @@ COPY . /app
 ENTRYPOINT ./entrypoint.sh
 ```
 
+Run `docker build` in the same folder of Dockerfile.
+
 ```bash
 docker build -f Dockerfile -t hantsy/myapp .
 ```
 
 ## Networking
 
-bridge
+By default, it use `bridge`.
 
 ```bash
 docker run ubuntu 
 ```
 
-none
+Set it to `none`.
 
 ```bash
 docker run ubuntu --network=none
 ```
 
-host
+Use the `host` network.
 
 ```bash
 docker run ubuntu --network=host
@@ -182,13 +192,13 @@ Custom network.
 docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network
 ```
 
-List networks
+List all networks.
 
 ```bash
 docker network ls
 ```
 
-Inspect.
+Inspect a network.
 
 ```bash
 docker inspect <network name>
@@ -196,7 +206,7 @@ docker inspect <network name>
 
 ## Storage
 
-File system.
+Use file system as storage.
 
 ```bas
 docker volume create data_volume
@@ -204,13 +214,13 @@ docker run -v data_volume:/var/lib/mysql mysql
 docker run -v /data/mysql:/var/lib/mysql mysql
 ```
 
-
+More detailed configuration.
 
 ```bash
 docker run --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
 ```
 
-Storage  drivers.
+All avaiable storage drivers.
 
 * AUFS
 * ZFS
@@ -221,7 +231,7 @@ Storage  drivers.
 
 ## Docker Compose
 
-Docker compose  yaml sample.
+An *docker-compose.yaml* sample.
 
 ```yaml
 version:3
@@ -264,6 +274,7 @@ networks:
   front-end:
   back-end:
 ```
+Translated to the following commands one by one.
 
 ```bash 
 docker run -d --name=redis redis
@@ -275,11 +286,20 @@ docker run -d --name=worker --link db:db --link redis:redis worker
 
 ## Registry
 
+Setup a custom docker registry using docker registry image.
+
 ```bash
 docker pull nginx
 docker login
 docker tag user-service localhost:5000/user-service
 docker push hantsy/user-service
+```
+
+
+## Docker Swarm
+
+```bash
+docker swarm init
 ```
 
 ## Container Orchestration
@@ -288,11 +308,4 @@ docker push hantsy/user-service
 docker service create --replicas=2 nodejs
 ```
 
-
-
-## Docker Swarm
-
-```bash
-docker swarm init
-```
 
