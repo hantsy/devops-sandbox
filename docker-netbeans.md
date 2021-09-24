@@ -14,6 +14,7 @@ Make sure at least one Docker Machine is running. We will try to connect to the 
    
    Use the default value in this wizard.
    
+   | Field| Value|
    |---|---|
    |Name|Local Docker|
    |URL|https://192.168.99.100:2376|
