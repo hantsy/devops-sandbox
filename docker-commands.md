@@ -2,7 +2,7 @@
 
 ## Docker Container
 
-Run a container .
+Run a container from image.
 
 ```bash
 docker run nginx
@@ -92,6 +92,7 @@ Remove all docker containers, add a `-q` parameter to get the container ids.
 
 ```bash 
 docker rm $(docker ps -a -q)
+docker rm $(docker ps -a -q) -f //by force, will remove the active containers.
 ```
 
 Stop all docker containers.
@@ -100,11 +101,34 @@ Stop all docker containers.
 docker stop $(docker ps -a -q)
 ```
 
+## Backup and Restore
 
+Export the container content into an tar arhive.
+
+```bash
+docker export <docker id or name> -o ng.tar
+docker save  <image name> -o myng.tar
+```
+
+Restore the archive.
+
+```bash
+docker import <file name> <repository:tag>
+docker load -i <file name or stdin>
+// use `docker images` to shwo all images.
+```
 
 ## Docker Images
 
-List images.
+Pull a docker image.
+
+```bash
+docker pull nginx
+
+//`docker run` will pull the image firstly.
+```
+
+List All Docker images.
 
 ```bash
 docker images
@@ -131,8 +155,6 @@ ENTRYPOINT ./entrypoint.sh
 ```bash
 docker build -f Dockerfile -t hantsy/myapp .
 ```
-
-
 
 ## Networking
 
