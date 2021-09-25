@@ -2,12 +2,14 @@
 
 ## Git branch
 
- * `git checkout -b feature1` (create a new branch, called "feature1").
+ * `git checkout -b feature-a` (create a new branch, called "feature-a").
+ * `git push -u origin feature-a` (push changes to remote "feature-a").
  * `git checkout master` (switch back to master branch).
  * `git pull origin master` (pull changes from master, optional).
- * `git merge feature1` (merged "feature1" branch back to master branch).
- * `git branch -d feature1` (delete the local branch after merge, optional).
+ * `git merge feature-a` (merged "feature-a" branch back to master branch).
+ * `git branch -d feature-a` (delete the local branch after merge, optional).
  * `git push origin master` (push changes to remote master, optional).
+ * `git push -d origin feature-a` (remove remote branch "feature-a").
 
 ## Git log 
 
