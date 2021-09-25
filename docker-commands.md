@@ -103,19 +103,26 @@ docker stop $(docker ps -a -q)
 
 ## Backup and Restore
 
-Export the container content into an tar arhive.
+Export and import the container content.
 
 ```bash
 docker export <docker id or name> -o ng.tar
-docker save  <image name> -o myng.tar
+docker import <file name> <repository:tag>
 ```
 
-Restore the archive.
+Save and load a docker image.
 
 ```bash
-docker import <file name> <repository:tag>
+docker save  <image name> -o myng.tar
 docker load -i <file name or stdin>
 // use `docker images` to shwo all images.
+```
+
+Copy files between container and host machine.
+
+```bash
+docker cp /tmp/nginx.conf <docker id or name>:/etc/nginx
+docker cp <docker id or name>:/var/lib/postgres/data  /tmp
 ```
 
 ## Docker Images
