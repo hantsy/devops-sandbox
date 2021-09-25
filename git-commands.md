@@ -19,7 +19,7 @@
  * `gh pr create` (use Githbu CLI to create a PR against upstream master branch for code review)
  *  Do code review and refactor your codes according to continuous testing result, code quality report and manual feedbacks.
  *  `gh merge <pr id>` (use `gh pr list` to show all PRs firstly)
- *  fill the essential info and merge into uptream master(or a develop branch)
+ *  select merge strategy(merge, rebase, squash), fill the essential info and merge into uptream master(or a develop branch)
  *  `git checkout master`, `git pull upstream master`, `git push origin master`, and ready for the next feature development lifecycle.
 
 ## Git log 
