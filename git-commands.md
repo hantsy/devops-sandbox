@@ -6,10 +6,21 @@
  * `git push -u origin feature-a` (push changes to remote "feature-a").
  * `git checkout master` (switch back to master branch).
  * `git pull origin master` (pull changes from master, optional).
- * `git merge feature-a` (merged "feature-a" branch back to master branch).
+ * `git merge feature-a` (merge "feature-a" branch back to master branch).
  * `git branch -d feature-a` (delete the local branch after merge, optional).
  * `git push origin master` (push changes to remote master, optional).
  * `git push -d origin feature-a` (remove remote branch "feature-a").
+
+## A Simple workable Github Flow
+
+ *  fork the upstream to your account
+ * `git clone <url from your account>`
+ * `git checkout -b feat-a` (create a working branch)
+ * `gh pr create` (create a PR for code review using Githbu CLI)
+ *  Do code review and refactor your codes according to feedbacks.
+ *  `gh merge <pr id>` (use `gh pr list` to show all PRs)
+ *  fill the essential info and merge into uptream master( or a develop branch)
+ *  `git checkout master`, `git pull upstream master`, `git push origin master`, and ready for the next feature development.
 
 ## Git log 
 
