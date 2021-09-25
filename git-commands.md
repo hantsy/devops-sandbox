@@ -13,14 +13,14 @@
 
 ## A Simple workable Github Flow
 
- *  fork the upstream to your account
- * `git clone <url from your account>`
+ *  fork the upstream project into your own account
+ * `git clone <url from your account>`(clone the sources into your local disk)
  * `git checkout -b feat-a` (create a working branch)
- * `gh pr create` (create a PR for code review using Githbu CLI)
- *  Do code review and refactor your codes according to feedbacks.
- *  `gh merge <pr id>` (use `gh pr list` to show all PRs)
- *  fill the essential info and merge into uptream master( or a develop branch)
- *  `git checkout master`, `git pull upstream master`, `git push origin master`, and ready for the next feature development.
+ * `gh pr create` (use Githbu CLI to create a PR against upstream master branch for code review)
+ *  Do code review and refactor your codes according to continuous testing result, code quality report and manual feedbacks.
+ *  `gh merge <pr id>` (use `gh pr list` to show all PRs firstly)
+ *  fill the essential info and merge into uptream master(or a develop branch)
+ *  `git checkout master`, `git pull upstream master`, `git push origin master`, and ready for the next feature development lifecycle.
 
 ## Git log 
 
